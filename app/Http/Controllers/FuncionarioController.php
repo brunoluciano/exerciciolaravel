@@ -25,7 +25,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('funcionarios.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //redirect view();
     }
 
     /**
