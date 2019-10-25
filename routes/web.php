@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('funcionarios/index');
 });
+
+Route::resource('funcionarios', 'FuncionarioController');
