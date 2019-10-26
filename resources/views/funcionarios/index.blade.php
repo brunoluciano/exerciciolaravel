@@ -2,6 +2,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading mb-0">{{ $message }}</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="jumbotron bg-dark text-white py-4">
                 <h1 class="display-3">Funcionários</h1>
                 <hr class="my-2 bg-info">
@@ -23,13 +31,13 @@
                         <tbody>
                             @foreach ($funcionarios as $funcionario)
                                 <tr>
-                                    <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST">
-                                        <th scope="row">{{ $funcionario->id }}</th>
-                                        <td>{{ $funcionario->nome }}</td>
-                                        <td>{{ $funcionario->cargo }}</td>
-                                        <td>{{ date('d/m/Y h:m', strtotime($funcionario->data_matricula))}}</td>
-                                        <td>R$ {{ $funcionario->salario }}</td>
-                                        <td>
+                                    <th scope="row">{{ $funcionario->id }}</th>
+                                    <td>{{ $funcionario->nome }}</td>
+                                    <td>{{ $funcionario->cargo }}</td>
+                                    <td>{{ date('d/m/Y h:m', strtotime($funcionario->data_matricula))}}</td>
+                                    <td>R$ {{ $funcionario->salario }}</td>
+                                    <td>
+                                        <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST">
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('funcionarios.show', $funcionario->id) }}" class="btn btn-secondary btn-sm" role="button" data-toggle="tooltip" data-placement="top" title="Exibir">
                                                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -37,18 +45,22 @@
                                                 <a href="{{ route('funcionarios.edit', $funcionario->id) }}" class="btn btn-warning btn-sm" role="button" data-toggle="tooltip" data-placement="top" title="Editar">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </a>
-                                                <button type="submit" class="btn btn-danger btn-sm" href="{{ route('funcionarios.destroy', $funcionario->id) }}"
-                                                        onclick="return confirm('Deseja realmente remover o funcionário {{ $funcionario->nome }}?')" data-toggle="tooltip" data-placement="top" title="Excluir">
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente remover o funcionário {{ $funcionario->nome }}?')" data-toggle="tooltip" data-placement="top" title="Excluir">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </button>
                                             </div>
-                                        </td>
-                                    </form>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 @else
+                    <br>
                     <div class="alert alert-warning p-4" role="alert">
                         <h2 class="alert-heading">Nenhum Funcionário!</h2>
                         <p></p>

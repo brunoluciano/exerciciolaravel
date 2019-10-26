@@ -43,9 +43,9 @@ class FuncionarioController extends Controller
             'data_matricula' => 'date',
             'salario' => 'requerided | numeric'
         ]);
-        
+
         Funcionario::create($request->all());
-        
+
         $nome = $request->input('nome');
 
         return redirect()->view('funcionarios.store')
@@ -103,6 +103,8 @@ class FuncionarioController extends Controller
      */
     public function destroy(Funcionario $funcionario)
     {
-        //
+        $funcionario->delete();
+
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário removido com sucesso!');
     }
 }
