@@ -36,7 +36,19 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //redirect view();
+        $request->validate([
+            'nome' => 'requerided | max:35',
+            'cargo' => 'requerided | max:20',
+            'data_matricula' => 'date',
+            'salario' => 'requerided | numeric'
+        ]);
+        
+        Funcionario::create($request->all());
+        
+        $nome = $request->input('nome');
+
+        return redirect()->view('funcionarios.store')
+                ->with('Funcionario '. $nome .' adicionado com sucesso.');
     }
 
     /**

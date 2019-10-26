@@ -7,32 +7,29 @@
             <hr class="my-2 bg-info">
             <br>
             <form action="{{ route('funcionarios.store') }}" method="POST">
-                {{ csrf_field() }}
+                @csrf
                 <div class="form-group row">
-                    <div class="field">
-                        <strong class="col-sm-2 col-form-label">Nome: </strong>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="nome" maxlength="35" size="25" autocomplete="off">
-                        </div>
+                    <strong class="col-sm-2 col-form-label">Nome: </strong>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nome" maxlength="35" autocomplete="off">
                     </div>
                 </div>
-                <div class="field">
-                    <strong>Cargo: </strong>
-                    <div class="control">
-                        <input type="text" class="input" name="cargo" maxlength="20" autocomplete="off">
+                <div class="form-group row">
+                    <strong class="col-sm-2 col-form-label">Cargo: </strong>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="cargo" maxlength="20" autocomplete="off">
                     </div>
                 </div>
-                <div class="field">
-                    <strong>Data da Matricula: </strong>
-                    <div class="control">
-                        <input type="date" class="date" name="data_matricula" autocomplete="off">
+                <div class="form-group row">
+                    <strong class="col-sm-2 col-form-label">Data da Matricula: </strong>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="data_matricula" autocomplete="off">
                     </div>
                 </div>
-                <div class="field">
-                    <strong>Salário: </strong>
-                    <div class="control">
-                        <strong>R$</strong>
-                        <input type="number" step="0.01" class="date" name="data_matricula" autocomplete="off">
+                <div class="form-group row">
+                    <strong class="col-sm-2 col-form-label">Salário: <span class="text-right">R$</span></strong>
+                    <div class="col-md-10">
+                        <input type="number" step="0.01" class="form-control" name="data_matricula" size="20" autocomplete="off">
                     </div>
                 </div>
                 <input type="submit" value="Cadastrar">
