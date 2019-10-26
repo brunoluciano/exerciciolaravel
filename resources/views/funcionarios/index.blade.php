@@ -5,8 +5,10 @@
             <div class="jumbotron bg-dark text-white py-4">
                 <h1 class="display-3">Funcionários</h1>
                 <hr class="my-2 bg-info">
-                <br>
                 @if ($funcionarios->count() > 0)
+                    <a href="{{ route('funcionarios.create') }}" class="btn btn-success mb-2" role="button">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                    </a>
                     <table class="table table-info table-striped table-hover text-center">
                         <thead class="bg-primary text-white">
                             <tr>
@@ -25,7 +27,7 @@
                                         <th scope="row">{{ $funcionario->id }}</th>
                                         <td>{{ $funcionario->nome }}</td>
                                         <td>{{ $funcionario->cargo }}</td>
-                                        <td>{{ $funcionario->data_matricula }}</td>
+                                        <td>{{ date('d/m/Y h:m', strtotime($funcionario->data_matricula))}}</td>
                                         <td>R$ {{ $funcionario->salario }}</td>
                                         <td>
                                             <div class="btn-group" role="group">

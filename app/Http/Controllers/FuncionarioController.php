@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Funcionario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class FuncionarioController extends Controller
 {
@@ -58,7 +59,7 @@ class FuncionarioController extends Controller
      */
     public function edit(Funcionario $funcionario)
     {
-        //
+        return view('funcionarios.edit', compact('funcionario'));
     }
 
     /**
@@ -70,7 +71,16 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, Funcionario $funcionario)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'cargo' => 'required',
+            'data_matricula' => 'required',
+            'salario' => 'required'
+        ]);
+
+        $funcionario->update($request->all());
+
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário atualizado com sucesso!');
     }
 
     /**
