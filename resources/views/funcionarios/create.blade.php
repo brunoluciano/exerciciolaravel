@@ -20,13 +20,13 @@
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" name="cargo" placeholder="Nome do funcionário" autocomplete="off">
+                                    <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-md-2 col-form-label text-right">Data Matrícula</label>
                                 <div class="col-md-10">
-                                    <input type="date" class="form-control" name="data_matricula" placeholder="Nome do funcionário">
+                                    <input type="date" class="form-control" name="data_matricula">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -36,7 +36,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">R$</div>
                                         </div>
-                                        <input type="number" step="0.01" class="form-control" name="salario" placeholder="Nome do funcionário">
+                                        <input type="number" step="0.01" class="form-control" name="salario" placeholder="Salário do funcionário">
                                     </div>
                                 </div>
                             </div>
