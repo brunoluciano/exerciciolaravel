@@ -15,13 +15,13 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Nome</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário" value="{{ $funcionario->nome }}">
+                                        <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário" value="{{ $funcionario->nome }}" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="cargo" placeholder="Nome do funcionário" value="{{ $funcionario->cargo }}">
+                                        <input type="text" class="form-control" name="cargo" placeholder="Nome do funcionário" value="{{ $funcionario->cargo }}" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -37,7 +37,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">R$</div>
                                             </div>
-                                            <input type="number" step="0.01" class="form-control" name="salario" placeholder="Nome do funcionário" value="{{ $funcionario->salario }}">
+                                            <input type="number" step="0.01" class="form-control" name="salario" placeholder="Nome do funcionário" value="{{number_format($funcionario->salario,2,'.','')}}">
                                         </div>
                                     </div>
                                 </div>

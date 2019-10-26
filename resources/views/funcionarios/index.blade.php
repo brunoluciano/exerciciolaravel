@@ -28,7 +28,7 @@
                                         <td>{{ $funcionario->nome }}</td>
                                         <td>{{ $funcionario->cargo }}</td>
                                         <td>{{ date('d/m/Y h:m', strtotime($funcionario->data_matricula))}}</td>
-                                        <td>R$ {{ $funcionario->salario }}</td>
+                                        <td>R$ {{number_format($funcionario->salario,2,'.','')}}</td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('funcionarios.show', $funcionario->id) }}" class="btn btn-secondary btn-sm" role="button" data-toggle="tooltip" data-placement="top" title="Exibir">

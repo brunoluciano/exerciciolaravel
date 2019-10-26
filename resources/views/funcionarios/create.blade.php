@@ -3,40 +3,56 @@
 <div class="row">
     <div class="col-md-12">
         <div class="jumbotron bg-dark text-white py-4">
-            <h1 class="display-3">Adicionar Funcionário</h1>
+            <h1>Inserir Funcionário</h1>
             <hr class="my-2 bg-info">
-            <br>
-            <form action="{{ route('funcionarios.store') }}" method="POST">
-                @csrf
-                <div class="form-group row">
-                    <strong class="col-sm-2 col-form-label">Nome: </strong>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nome" maxlength="35" autocomplete="off">
+            <div class="row justify-content-center">
+                <div class="col-md-10 mt-3">
+                    <div class="jumbotron bg-secondary pt-5 pb-0 border border-white">
+                        <form action="{{ route('funcionarios.store') }}" method="POST" class="mt-0">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-md-2 col-form-label text-right">Nome</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="cargo" placeholder="Nome do funcionário" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-md-2 col-form-label text-right">Data Matrícula</label>
+                                <div class="col-md-10">
+                                    <input type="date" class="form-control" name="data_matricula" placeholder="Nome do funcionário">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-md-2 col-form-label text-right">Salário</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">R$</div>
+                                        </div>
+                                        <input type="number" step="0.01" class="form-control" name="salario" placeholder="Nome do funcionário">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-10 offset-md-2">
+                                    <hr class="bg-white">
+                                    <input type="submit" class="btn btn-info" value="Atualizar">
+                                    <input type="reset" class="btn btn-dark" value="Limpar">
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                    <a class="btn btn-outline-light" href="{{ route('funcionarios.index') }}" role="button">Voltar</a>
                 </div>
-                <div class="form-group row">
-                    <strong class="col-sm-2 col-form-label">Cargo: </strong>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="cargo" maxlength="20" autocomplete="off">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <strong class="col-sm-2 col-form-label">Data da Matricula: </strong>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="data_matricula" autocomplete="off">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <strong class="col-sm-2 col-form-label">Salário: <span class="text-right">R$</span></strong>
-                    <div class="col-md-10">
-                        <input type="number" step="0.01" class="form-control" name="data_matricula" size="20" autocomplete="off">
-                    </div>
-                </div>
-                <input type="submit" value="Cadastrar">
-            </form>
+            </div>
         </div>
     </div>
 </div>
-
-
 @endsection
