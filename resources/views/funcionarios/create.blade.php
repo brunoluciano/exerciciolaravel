@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <div class="col-md-10 offset-md-2">
                                     <hr class="bg-white">
-                                    <input type="submit" class="btn btn-info" value="Atualizar">
+                                    <input type="submit" class="btn btn-info" value="Inserir">
                                     <input type="reset" class="btn btn-dark" value="Limpar">
                                 </div>
                             </div>
