@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
-Route::resource('funcionarios', 'FuncionarioController');
+Auth::routes();
+
+Route::resource('funcionarios', 'FuncionarioController')->middleware('auth');
+Route::resource('cargos', 'CargoController')->middleware('auth');
+Route::resource('levels', 'LevelController')->middleware('auth');
+
+Route::get('/home', 'HomeController@index')->name('home');

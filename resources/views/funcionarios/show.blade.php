@@ -20,7 +20,13 @@
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" value="{{$funcionario->cargo}}" disabled>
+                                    <input type="text" class="form-control" value="{{$funcionario->cargo->descricao}}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-md-2 col-form-label text-right">Nível</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" value="{{$funcionario->level->descricao}}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">

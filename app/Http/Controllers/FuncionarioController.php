@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Funcionario;
+use App\Cargo;
+use App\Level;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -15,7 +18,17 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::get();
+        $funcionarios = Funcionario::orderby('id','desc')->get();
+
+        foreach ($funcionarios as $funcionario) {
+            $baseSalCargo = $funcionario->cargo->salarioBase;
+            $percAumento = $funcionario->level->percAumento;
+            $salario = $baseSalCargo + (($baseSalCargo*$percAumento)/100);
+
+            Funcionario::where('id','=',$funcionario->id)
+                       ->update(['salario' => $salario]);
+        }
+
         return view('funcionarios.index', compact('funcionarios'));
     }
 
@@ -26,7 +39,20 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionarios.create');
+        $funcionarios = Funcionario::get();
+        $cargos = Cargo::orderby('descricao')->get();
+        $levels = Level::orderby('percAumento')->get();
+
+        foreach ($funcionarios as $funcionario) {
+            $baseSalCargo = $funcionario->cargo->salarioBase;
+            $percAumento = $funcionario->level->percAumento;
+            $salario = $baseSalCargo + (($baseSalCargo*$percAumento)/100);
+
+            Funcionario::where('id','=',$funcionario->id)
+                       ->update(['salario' => $salario]);
+        }
+
+        return view('funcionarios.create', compact('cargos', 'levels'));
     }
 
     /**
@@ -37,19 +63,33 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
+        $funcionarios = Funcionario::get();
+
         $request->validate([
             'nome' => 'required | max:35',
-            'cargo' => 'required | max:20',
-            'data_matricula' => 'date',
-            'salario' => 'required | numeric'
+            'data_matricula' => 'date'
         ]);
 
         Funcionario::create($request->all());
 
+        $lastId = Funcionario::latest()->first()->id;
+
         $nome = $request->input('nome');
+        $cargo_id = $request->input('cargo_id');
+        $level_id = $request->input('level_id');
+
+        $salarioBase = Cargo::where('id', '=', $cargo_id)->get()->first();
+        $perc = Level::where('id', '=', $level_id)->get()->first();
+
+        $baseSalCargo = $salarioBase->salarioBase;
+        $percAumento = $perc->percAumento;
+        $salario = $baseSalCargo + (($baseSalCargo*$percAumento)/100);
+
+        Funcionario::where('id','=',$lastId)
+                    ->update(['salario' => $salario]);
 
         return redirect()->route('funcionarios.index')
-                ->with('Funcionario '. $nome .' adicionado com sucesso.');
+                         ->with('Funcionario '. $nome .' adicionado com sucesso.');
     }
 
     /**
@@ -60,6 +100,12 @@ class FuncionarioController extends Controller
      */
     public function show(Funcionario $funcionario)
     {
+        $baseSalCargo = $funcionario->cargo->salarioBase;
+        $percAumento = $funcionario->level->percAumento;
+        $salario = $baseSalCargo + (($baseSalCargo*$percAumento)/100);
+        Funcionario::where('id','=',$funcionario->id)
+                   ->update(['salario' => $salario]);
+
         return view('funcionarios.show', compact('funcionario'));
     }
 
@@ -71,7 +117,10 @@ class FuncionarioController extends Controller
      */
     public function edit(Funcionario $funcionario)
     {
-        return view('funcionarios.edit', compact('funcionario'));
+        $cargos = Cargo::orderby('descricao')->get();
+        $levels = Level::orderby('percAumento')->get();
+
+        return view('funcionarios.edit', compact('funcionario', 'cargos', 'levels'));
     }
 
     /**
@@ -85,12 +134,16 @@ class FuncionarioController extends Controller
     {
         $request->validate([
             'nome' => 'required',
-            'cargo' => 'required',
-            'data_matricula' => 'required',
-            'salario' => 'required'
+            'data_matricula' => 'required'
         ]);
 
         $funcionario->update($request->all());
+
+        $baseSalCargo = $funcionario->cargo->salarioBase;
+        $percAumento = $funcionario->level->percAumento;
+        $salario = $baseSalCargo + (($baseSalCargo*$percAumento)/100);
+        Funcionario::where('id','=',$funcionario->id)
+                   ->update(['salario' => $salario]);
 
         return redirect()->route('funcionarios.index')->with('success', 'Funcionário atualizado com sucesso!');
     }

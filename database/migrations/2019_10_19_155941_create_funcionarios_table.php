@@ -15,12 +15,9 @@ class CreateFuncionariosTable extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-
             $table->string('nome', 35);
-            $table->string('cargo', 20);
             $table->dateTime('data_matricula');
-            $table->float('salario',8,2);
-
+            $table->float('salario',8,2)->nullable()->default(null);
             $table->timestamps();
         });
     }

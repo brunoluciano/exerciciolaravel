@@ -23,6 +23,7 @@
                                 <th>ID</th>
                                 <th>NOME</th>
                                 <th>CARGO</th>
+                                <th>NÍVEL</th>
                                 <th>DATA MATRÍCULA</th>
                                 <th>SALÁRIO</th>
                                 <th>OPERAÇÕES</th>
@@ -34,9 +35,10 @@
                                     <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST">
                                         <th scope="row">{{ $funcionario->id }}</th>
                                         <td>{{ $funcionario->nome }}</td>
-                                        <td>{{ $funcionario->cargo }}</td>
+                                        <td>{{ $funcionario->cargo->descricao }}</td>
+                                        <td>{{ $funcionario->level->descricao }}</td>
                                         <td>{{ date('d/m/Y h:m', strtotime($funcionario->data_matricula))}}</td>
-                                        <td>R$ {{number_format($funcionario->salario,2,',','')}}</td>
+                                        <td>R$ {{number_format($funcionario->salario,2,',','.')}}</td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('funcionarios.show', $funcionario->id) }}" class="btn btn-secondary btn-sm" role="button" data-toggle="tooltip" data-placement="top" title="Exibir">

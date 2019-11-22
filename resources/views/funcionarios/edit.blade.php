@@ -15,32 +15,63 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Nome</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário" value="{{ $funcionario->nome }}" autocomplete="off">
+                                        <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário" value="{{ $funcionario->nome }}" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
+                                    <label for="exampleFormControlSelect1" class="col-md-2 col-form-label text-right">Cargo</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário" value="{{ $funcionario->cargo }}" autocomplete="off">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="cargo_id" required>
+                                            {{-- <option selected>Escolher...</option> --}}
+                                            @foreach ($cargos as $cargo)
+                                                @if ($funcionario->cargo->id == $cargo->id)
+                                                    <option selected value="{{ $cargo->id }}">{{ $cargo->descricao }}</option>
+                                                @else
+                                                    <option value="{{ $cargo->id }}">{{ $cargo->descricao }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1" class="col-md-2 col-form-label text-right">Nível</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="level_id" required>
+                                            <option selected>Escolher...</option>
+                                            @foreach ($levels as $level)
+                                                @if ($funcionario->level->id == $level->id)
+                                                    <option selected value="{{ $level->id }}">{{ $level->descricao }}</option>
+                                                @else
+                                                    <option value="{{ $level->id }}">{{ $level->descricao }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="form-group row">
+                                    <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário" value="{{ $funcionario->cargo->descricao }}" autocomplete="off" required>
+                                    </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Data Matrícula</label>
                                     <div class="col-md-10">
-                                        <input type="date" class="form-control" name="data_matricula" value="{{ date('Y-m-d', strtotime($funcionario->data_matricula)) }}">
+                                        <input type="date" class="form-control" name="data_matricula" value="{{ date('Y-m-d', strtotime($funcionario->data_matricula)) }}" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Salário</label>
                                     <div class="col-md-10">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">R$</div>
                                             </div>
-                                            <input type="number" step="0.01" class="form-control" name="salario" placeholder="Salário do funcionário" value="{{number_format($funcionario->salario,2,'.','')}}">
+                                            <input type="number" step="0.01" class="form-control" name="salario" placeholder="Salário do funcionário" value="{{number_format($funcionario->salario,2,'.','')}}" required>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <div class="col-md-10 offset-md-2">
                                         <hr class="bg-white">
