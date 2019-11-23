@@ -15,7 +15,7 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-md-2 col-form-label text-right">Cargo</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="descricao" placeholder="Nome do cargo" value="{{ $cargo->descricao }}" autocomplete="off">
+                                        <input type="text" class="form-control" name="descricao" placeholder="Nome do cargo" value="{{ $cargo->descricao }}" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -25,7 +25,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">R$</div>
                                             </div>
-                                            <input type="number" step="0.01" class="form-control" name="salarioBase" placeholder="Salário do funcionário" value="{{number_format($cargo->salarioBase,2,'.','')}}">
+                                            <input type="number" step="0.01" class="form-control" name="salarioBase" placeholder="Salário do funcionário" value="{{number_format($cargo->salarioBase,2,'.','')}}" required>
                                         </div>
                                     </div>
                                 </div>
